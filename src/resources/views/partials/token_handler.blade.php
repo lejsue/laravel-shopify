@@ -4,13 +4,13 @@
 
     // Token updates
     document.addEventListener(LOAD_EVENT, () => {
-        retrieveToken(app);
-        keepRetrievingToken(app);
+        retrieveToken();
+        keepRetrievingToken();
     });
 
     // Retrieve session token
-    async function retrieveToken(app) {
-        window.sessionToken = await utils.getSessionToken(app);
+    async function retrieveToken() {
+        window.sessionToken = await shopify.idToken();
 
         // Update everything with the session-token class
         Array.from(document.getElementsByClassName('session-token')).forEach((el) => {
@@ -47,9 +47,9 @@
     }
 
     // Keep retrieving a session token periodically
-    function keepRetrievingToken(app) {
+    function keepRetrievingToken() {
         setInterval(() => {
-            retrieveToken(app);
+            retrieveToken();
         }, SESSION_TOKEN_REFRESH_INTERVAL);
     }
 

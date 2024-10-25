@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+    @if(config('shopify-app.appbridge_enabled'))
+        <ui-title-bar title="Welcome"></ui-title-bar>
+    @endif
+
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title m-b-md">
@@ -13,7 +17,7 @@
 
             <p>Welcome to your Shopify App powered by Laravel.</p>
             <p>&nbsp;</p>
-            <p>{{ $shop->name }}</p>
+            <p>{{ $shopDomain ?? Auth::user()->name }}</p>
             <p>&nbsp;</p>
 
             <div class="links">
@@ -27,10 +31,4 @@
 
 @section('scripts')
     @parent
-
-    @if(config('shopify-app.appbridge_enabled'))
-        <script>
-            actions.TitleBar.create(app, { title: 'Welcome' });
-        </script>
-    @endif
 @endsection

@@ -37,10 +37,12 @@
 
     @if(config('shopify-app.appbridge_enabled'))
         <script>
-            const host = new URLSearchParams(location.search).get("host")
-            utils.getSessionToken(app).then((token) => {
+            async function tokenRedirect() {
+                const host = new URLSearchParams(location.search).get("host");
+                const token = await shopify.idToken();
                 window.location.href = `{!! $target !!}{!! Str::contains($target, '?') ? '&' : '?' !!}token=${token}{{ Str::contains($target, 'host')? '' : '&host=${host}'}}`;
-            });
+            }
+            tokenRedirect();
         </script>
     @endif
 @endsection

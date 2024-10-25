@@ -37,7 +37,7 @@ return [
     */
 
     'domain' => env('SHOPIFY_DOMAIN'),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Manual routes
@@ -150,13 +150,8 @@ return [
 
     'appbridge_enabled' => (bool) env('SHOPIFY_APPBRIDGE_ENABLED', true),
 
-    // Use semver range to link to a major or minor version number.
-    // Leaving empty will use the latest version - not recommended in production.
-    'appbridge_version' => env('SHOPIFY_APPBRIDGE_VERSION', 'latest'),
-
-    // Set a new CDN URL if you want to host the AppBridge JS yourself or unpkg goes down.
-    // DO NOT include a trailing slash.
-    'appbridge_cdn_url' => env('SHOPIFY_APPBRIDGE_CDN_URL', 'https://unpkg.com'),
+    // Set a new CDN URL if you want to host the AppBridge JS yourself.
+    'appbridge_cdn_url' => env('SHOPIFY_APPBRIDGE_CDN_URL', 'https://cdn.shopify.com/shopifycloud/app-bridge.js'),
 
     /*
     |--------------------------------------------------------------------------

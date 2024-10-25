@@ -6,7 +6,8 @@
 
         <title>Redirecting...</title>
 
-        <script src="{{config('shopify-app.appbridge_cdn_url') ?? 'https://unpkg.com'}}/@shopify/app-bridge{!! $appBridgeVersion !!}"></script>
+        <meta name="shopify-api-key" content="{{ \Osiset\ShopifyApp\Util::getShopifyConfig('api_key', $shopDomain ?? Auth::user()->name ) }}" />
+        <script src="{{ config('shopify-app.appbridge_cdn_url') ?? 'https://cdn.shopify.com/shopifycloud/app-bridge.js' }}"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
                 var redirectUrl = "{!! $authUrl !!}";
@@ -19,16 +20,7 @@
                     normalizedLink = document.createElement('a');
                     normalizedLink.href = redirectUrl;
 
-                    var AppBridge = window['app-bridge'];
-                    var createApp = AppBridge.default;
-                    var Redirect = AppBridge.actions.Redirect;
-                    var app = createApp({
-                        apiKey: "{{ $apiKey }}",
-                        host: "{{ $host }}",
-                    });
-
-                    var redirect = Redirect.create(app);
-                    redirect.dispatch(Redirect.Action.REMOTE, normalizedLink.href);
+                    open(redirectUrl, '_top');
                 }
             });
         </script>
